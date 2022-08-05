@@ -111,7 +111,8 @@ document.querySelector("#btnUpdate").onclick = function () {
 };
 
 // GET tìm kiem
-document.querySelector("#btnSearch").onclick = function () {
+document.querySelector("#btnSearch").onclick = function (event) {
+  event.preventDefault();
   let productSearch = document.querySelector("#inputSearch").value;
   let promise = axios({
     url:
@@ -120,9 +121,8 @@ document.querySelector("#btnSearch").onclick = function () {
   });
   // xử lý thành công
   promise.then(function (result) {
-    if (result.data.name === productSearch) {
-      return getProduct();
-    }
+    console.log(result.data);
+    renderProduct(result.data);
   });
   // xử lý thất bại
   promise.catch(function (error) {
